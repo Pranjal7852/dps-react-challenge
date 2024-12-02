@@ -13,7 +13,7 @@ import {
 const CountryComponent = () => {
     return (
         <Select>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-1/4">
                 <SelectValue placeholder="Country" />
             </SelectTrigger>
             <SelectContent>
