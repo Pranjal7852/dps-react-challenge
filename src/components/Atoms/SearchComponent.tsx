@@ -7,7 +7,7 @@ type Props = {
 };
 
 const SearchComponent = (props: Props) => {
-  const { filterByName, filteredData } = useUserContext();
+  const { filterByName } = useUserContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
