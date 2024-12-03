@@ -8,52 +8,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUserContext } from "@/Context/UserContext";
 
-function processData(data: { address?: { city?: string } }[]): string[] {
-  const city: string[] = [];
-  data.forEach((row) => {
-    if (row?.address?.city) {
-      city.push(row.address.city);
-    }
-  });
-  return city;
-}
-const CountryComponent = () => {
-  const [cities, setCities] = useState<string[]>([]);
+const CountryComponent: React.FC = () => {
+  const { data, filterByCity, filteredData } = useUserContext();
+  const [selectedCity, setSelectedCity] = useState<string>("All");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios("https://dummyjson.com/users");
-        const city = processData(response.data.users);
-        setCities(city);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    filterByCity(selectedCity);
+  }, [selectedCity, filteredData]);
 
-    fetchData();
-  }, []);
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city);
+  };
+
+  const cities: string[] = ["All", ...new Set(data.map((user) => user.city))];
+
   return (
-    <Select>
+    <Select value={selectedCity} onValueChange={handleCitySelect}>
       <SelectTrigger className="w-1/4">
-        <SelectValue placeholder="Select City" />
+        <SelectValue placeholder="Select City">{selectedCity}</SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>City</SelectLabel>
-          {/* Dynamically render SelectItems based on cities */}
-          {cities.length > 0 ? (
-            cities.map((city, index) => (
-              <SelectItem key={index} value={city}>
-                {city}
-              </SelectItem>
-            ))
-          ) : (
-            <SelectItem disabled value="No cities available">
-              No cities available
+          {cities.map((city, index) => (
+            <SelectItem key={index} value={city}>
+              {city}
             </SelectItem>
-          )}
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>
