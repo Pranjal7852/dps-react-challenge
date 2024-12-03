@@ -11,13 +11,16 @@ const SearchComponent = (props: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
-    // Filter the data when search term changes
-    filterByName(searchTerm);
+    const timer = setTimeout(() => {
+      filterByName(searchTerm);
+      console.log("debounce test");
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, [searchTerm]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("i got  cliekced", e.target.value);
-    setSearchTerm(e.target.value); // Update the search term
+    setSearchTerm(e.target.value);
   };
 
   return (
@@ -26,7 +29,7 @@ const SearchComponent = (props: Props) => {
       type="search"
       placeholder={props.placeholder}
       value={searchTerm}
-      onChange={handleSearchChange} // Update search term when typing
+      onChange={handleSearchChange}
     />
   );
 };

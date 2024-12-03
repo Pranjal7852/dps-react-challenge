@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import axios from "axios";
 
-// Define the types for user data
 interface User {
   id: number;
   name: string;
@@ -16,21 +15,20 @@ interface User {
 }
 
 interface UserContextType {
-  data: User[]; // The full dataset of users
-  filteredData: User[]; // The filtered dataset
-  filterByName: (searchTerm: string) => void; // Function to filter data by name
-  filterByCity: (selectedCity: string) => void; // Function to filter data by city
-  highlightOldest: boolean; // Add this
-  toggleHighlightOldest: () => void; // Add this
-  oldestUsers: User[]; // Add this
+  data: User[];
+  filteredData: User[];
+  filterByName: (searchTerm: string) => void;
+  filterByCity: (selectedCity: string) => void;
+  highlightOldest: boolean;
+  toggleHighlightOldest: () => void;
+  oldestUsers: User[];
 }
 
-// Create the context
+// Create the User data context
 export const UserContext = createContext<UserContextType | undefined>(
   undefined
 );
 
-// Define the props type for the provider
 interface UserProviderProps {
   children: ReactNode;
 }
@@ -57,7 +55,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     fetchData();
   }, []);
 
-  // Apply combined filtering logic
+  // FILTER LOGIC HERE
   useEffect(() => {
     const filtered = data.filter((user) => {
       const matchesName =
@@ -117,7 +115,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   );
 };
 
-// Custom hook to access UserContext
 export const useUserContext = (): UserContextType => {
   const context = useContext(UserContext);
   if (!context) {
