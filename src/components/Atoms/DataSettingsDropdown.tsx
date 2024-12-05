@@ -22,7 +22,7 @@ import {
   Rabbit,
   Code,
   Settings,
-  FileType,
+  WifiOff,
   Leaf,
   Languages,
 } from "lucide-react";
@@ -72,10 +72,11 @@ const DataSettingsDropdown: React.FC = () => {
           value={DataSettings.mode}
           onValueChange={(value) => {
             updateSetting("mode", value as DataSettings["mode"]);
+            if (value === mode) return; // do nothing on same button press
             if (value === "detail") {
-              toggleMode(); // Switch to detailed view in context
+              toggleMode();
             } else if (value === "normal") {
-              toggleMode(); // Switch to summary view in context
+              toggleMode();
             }
           }}
         >
@@ -89,8 +90,8 @@ const DataSettingsDropdown: React.FC = () => {
 
         <DropdownMenuSeparator />
 
-        {/* Color Blindness Mode */}
-        <DropdownMenuSub>
+        {/* Couldn't  make it to final implementation*/}
+        {/* <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Languages className="mr-2 h-4 w-4" />
             <span>Language</span>
@@ -124,7 +125,7 @@ const DataSettingsDropdown: React.FC = () => {
               </DropdownMenuRadioGroup>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
-        </DropdownMenuSub>
+        </DropdownMenuSub> */}
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Leaf className="mr-2 h-4 w-4" />
@@ -146,6 +147,35 @@ const DataSettingsDropdown: React.FC = () => {
                 </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem
                   value="detail"
+                  className="cursor-pointer"
+                >
+                  Off
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <WifiOff className="mr-2 h-4 w-4" />
+            <span>Offline Access</span>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuRadioGroup
+                value={DataSettings.mode}
+                onValueChange={(value) =>
+                  updateSetting("mode", value as DataSettings["mode"])
+                }
+              >
+                <DropdownMenuRadioItem
+                  value="offline-on"
+                  className="cursor-pointer"
+                >
+                  On
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem
+                  value="offline-off"
                   className="cursor-pointer"
                 >
                   Off
