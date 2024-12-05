@@ -13,7 +13,6 @@ const SearchComponent = (props: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       filterByName(searchTerm);
-      console.log("debounce test");
     }, 1000);
 
     return () => clearTimeout(timer);

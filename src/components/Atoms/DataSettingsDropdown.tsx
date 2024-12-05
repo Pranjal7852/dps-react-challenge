@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ import {
   Rabbit,
   Code,
   Settings,
-  WifiOff,
+  CloudDownload,
   Leaf,
   Languages,
 } from "lucide-react";
@@ -31,18 +31,34 @@ import { useUserContext } from "@/Context/UserContext";
 type DataSettings = {
   mode: "normal" | "detail";
   dataSaver: boolean;
-  sortButtons: boolean;
-  language: string;
+  offlineSave: boolean;
 };
 
 const DataSettingsDropdown: React.FC = () => {
   const [DataSettings, setDataSettings] = useState<DataSettings>({
     mode: "normal",
-    dataSaver: false,
-    sortButtons: false,
-    language: "ENG",
+    dataSaver: true,
+    offlineSave: true,
   });
-  const { mode, toggleMode } = useUserContext();
+  const {
+    mode,
+    toggleMode,
+    offlineMode,
+    dataSaver,
+    toggleOfflineMode,
+    toggleDataSaver,
+  } = useUserContext();
+
+  useEffect(() => {
+    const savedDataSaver = localStorage.getItem("dataSaver") === "true";
+    const savedOfflineMode = localStorage.getItem("offlineMode") === "true";
+    if (localStorage.getItem("dataSaver")) {
+      updateSetting("dataSaver", savedDataSaver);
+    }
+    if (localStorage.getItem("offlineMode")) {
+      updateSetting("offlineSave", savedOfflineMode);
+    }
+  }, []);
   const updateSetting = <T extends keyof DataSettings>(
     key: T,
     value: DataSettings[T]
@@ -73,11 +89,8 @@ const DataSettingsDropdown: React.FC = () => {
           onValueChange={(value) => {
             updateSetting("mode", value as DataSettings["mode"]);
             if (value === mode) return; // do nothing on same button press
-            if (value === "detail") {
-              toggleMode();
-            } else if (value === "normal") {
-              toggleMode();
-            }
+
+            toggleMode();
           }}
         >
           <DropdownMenuRadioItem value="normal" className="cursor-pointer">
@@ -134,21 +147,20 @@ const DataSettingsDropdown: React.FC = () => {
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
               <DropdownMenuRadioGroup
-                value={DataSettings.mode}
-                onValueChange={(value) =>
-                  updateSetting("mode", value as DataSettings["mode"])
-                }
+                value={DataSettings.dataSaver ? "on" : "off"}
+                onValueChange={(value) => {
+                  const isOn = value === "on";
+                  if (dataSaver === isOn) return; // Avoid unnecessary state updates
+
+                  // Update local settings and toggle data saver mode
+                  updateSetting("dataSaver", isOn);
+                  toggleDataSaver(isOn);
+                }}
               >
-                <DropdownMenuRadioItem
-                  value="normal"
-                  className="cursor-pointer"
-                >
+                <DropdownMenuRadioItem value="on" className="cursor-pointer">
                   On
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem
-                  value="detail"
-                  className="cursor-pointer"
-                >
+                <DropdownMenuRadioItem value="off" className="cursor-pointer">
                   Off
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
@@ -157,27 +169,26 @@ const DataSettingsDropdown: React.FC = () => {
         </DropdownMenuSub>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
-            <WifiOff className="mr-2 h-4 w-4" />
+            <CloudDownload className="mr-2 h-4 w-4" />
             <span>Offline Access</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
               <DropdownMenuRadioGroup
-                value={DataSettings.mode}
-                onValueChange={(value) =>
-                  updateSetting("mode", value as DataSettings["mode"])
-                }
+                value={DataSettings.offlineSave ? "on" : "off"}
+                onValueChange={(value) => {
+                  const isOn = value === "on";
+                  if (offlineMode === isOn) return; // Avoid unnecessary state updates
+
+                  // Update local settings and toggle data saver mode
+                  updateSetting("offlineSave", isOn);
+                  toggleOfflineMode(isOn);
+                }}
               >
-                <DropdownMenuRadioItem
-                  value="offline-on"
-                  className="cursor-pointer"
-                >
+                <DropdownMenuRadioItem value="on" className="cursor-pointer">
                   On
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem
-                  value="offline-off"
-                  className="cursor-pointer"
-                >
+                <DropdownMenuRadioItem value="off" className="cursor-pointer">
                   Off
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
