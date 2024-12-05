@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import { useUserContext } from "@/Context/UserContext";
 import PaginationComponent from "../Atoms/PaginationComponent";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const SkeletonRow = () => (
+  <tr className="border border-gray-300">
+    <td className="border border-gray-300 px-4 py-2">
+      <Skeleton className="h-4 w-full" />
+    </td>
+    <td className="border border-gray-300 px-4 py-2">
+      <Skeleton className="h-4 w-full" />
+    </td>
+    <td className="border border-gray-300 px-4 py-2">
+      <Skeleton className="h-4 w-full" />
+    </td>
+  </tr>
+);
 
 const Table = () => {
-  const { filteredData, oldestUsers, highlightOldest } = useUserContext();
+  const { filteredData, oldestUsers, highlightOldest, isLoading } =
+    useUserContext();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 13;
 
@@ -43,34 +59,44 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {currentPageData.map((user, index) => (
-            <tr
-              key={index}
-              className={
-                isOldestUser(user.id) && highlightOldest
-                  ? "bg-[#878dfb]"
-                  : index % 2 === 0
-                  ? "bg-blue-100"
-                  : ""
-              }
-            >
-              <td className="border border-gray-300 px-4 py-2">{user.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{user.city}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {user.birthday}
-              </td>
-            </tr>
-          ))}
+          {isLoading
+            ? [...Array(itemsPerPage)].map((_, index) => (
+                <SkeletonRow key={index} />
+              ))
+            : currentPageData.map((user, index) => (
+                <tr
+                  key={index}
+                  className={
+                    isOldestUser(user.id) && highlightOldest
+                      ? "bg-[#878dfb]"
+                      : index % 2 === 0
+                      ? "bg-blue-100"
+                      : ""
+                  }
+                >
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.name}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.city}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.birthday}
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
 
-      <PaginationComponent
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-      />
+      {!isLoading && (
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+        />
+      )}
     </div>
   );
 };

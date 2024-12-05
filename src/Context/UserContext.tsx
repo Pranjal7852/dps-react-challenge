@@ -22,6 +22,7 @@ interface UserContextType {
   highlightOldest: boolean;
   toggleHighlightOldest: () => void;
   oldestUsers: User[];
+  isLoading: boolean;
 }
 
 // Create the User data context
@@ -38,19 +39,27 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("All");
   const [highlightOldest, setHighlightOldest] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch user data from API
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("https://dummyjson.com/users");
-      const processedData = response.data.users.map((user: any) => ({
-        id: user.id,
-        name: `${user.firstName} ${user.lastName}`,
-        city: user.address.city,
-        birthday: user.birthDate,
-      }));
-      setData(processedData);
-      setFilteredData(processedData);
+      setIsLoading(true);
+      try {
+        const response = await axios.get("https://dummyjson.com/users");
+        const processedData = response.data.users.map((user: any) => ({
+          id: user.id,
+          name: `${user.firstName} ${user.lastName}`,
+          city: user.address.city,
+          birthday: user.birthDate,
+        }));
+        setData(processedData);
+        setFilteredData(processedData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
   }, []);
@@ -108,6 +117,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         highlightOldest,
         toggleHighlightOldest,
         oldestUsers,
+        isLoading,
       }}
     >
       {children}
