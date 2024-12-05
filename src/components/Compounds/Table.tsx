@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useUserContext } from "@/Context/UserContext";
 import PaginationComponent from "../Atoms/PaginationComponent";
 import { Skeleton } from "@/components/ui/skeleton";
+import userImage from "@/assets/fallback_userImage.png";
 
 const SkeletonRow = ({ columns }: { columns: number }) => (
   <tr className="border border-gray-300">
@@ -82,10 +83,9 @@ const Table = () => {
                         {user.id}
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
-                        {}
                         <img
                           className="w-10 h-10 rounded-full"
-                          src={user.image}
+                          src={user.image || userImage}
                           alt="Rounded avatar"
                         ></img>
                       </td>
