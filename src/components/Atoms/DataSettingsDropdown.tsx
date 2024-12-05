@@ -26,7 +26,7 @@ import {
   Leaf,
   Languages,
 } from "lucide-react";
-
+import { useUserContext } from "@/Context/UserContext";
 // Define the type for Data settings
 type DataSettings = {
   mode: "normal" | "detail";
@@ -42,7 +42,7 @@ const DataSettingsDropdown: React.FC = () => {
     sortButtons: false,
     language: "ENG",
   });
-
+  const { mode, toggleMode } = useUserContext();
   const updateSetting = <T extends keyof DataSettings>(
     key: T,
     value: DataSettings[T]
@@ -70,9 +70,14 @@ const DataSettingsDropdown: React.FC = () => {
         <DropdownMenuLabel>Data View</DropdownMenuLabel>
         <DropdownMenuRadioGroup
           value={DataSettings.mode}
-          onValueChange={(value) =>
-            updateSetting("mode", value as DataSettings["mode"])
-          }
+          onValueChange={(value) => {
+            updateSetting("mode", value as DataSettings["mode"]);
+            if (value === "detail") {
+              toggleMode(); // Switch to detailed view in context
+            } else if (value === "normal") {
+              toggleMode(); // Switch to summary view in context
+            }
+          }}
         >
           <DropdownMenuRadioItem value="normal" className="cursor-pointer">
             <Turtle className="mr-2 h-4 w-4" /> Normal

@@ -12,6 +12,12 @@ interface User {
   name: string;
   city: string;
   birthday: string;
+  [key: string]: unknown;
+  age: number;
+  phone: string;
+  image: string;
+  role: string;
+  title: string;
 }
 
 interface UserContextType {
@@ -19,10 +25,12 @@ interface UserContextType {
   filteredData: User[];
   filterByName: (searchTerm: string) => void;
   filterByCity: (selectedCity: string) => void;
+  toggleMode: () => void;
   highlightOldest: boolean;
   toggleHighlightOldest: () => void;
   oldestUsers: User[];
   isLoading: boolean;
+  mode: "normal" | "detail";
 }
 
 // Create the User data context
@@ -40,6 +48,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [selectedCity, setSelectedCity] = useState<string>("All");
   const [highlightOldest, setHighlightOldest] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [mode, setMode] = useState<"normal" | "detail">("normal");
 
   // Fetch user data from API
   useEffect(() => {
@@ -52,9 +61,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
           name: `${user.firstName} ${user.lastName}`,
           city: user.address.city,
           birthday: user.birthDate,
+          age: user.age,
+          phone: user.phone,
+          image: user.image,
+          eyeColor: user.eyeColor,
+          role: user.role,
+          jobTitle: user.company.title,
         }));
         setData(processedData);
-        setFilteredData(processedData);
+        // setFilteredData(processedData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
@@ -74,8 +89,24 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
       return matchesName && matchesCity;
     });
-    setFilteredData(filtered);
-  }, [data, searchTerm, selectedCity]);
+    console.log("test", mode, filtered);
+    const processedFilteredData =
+      mode === "detail"
+        ? filtered.map((user) => ({
+            id: user.id,
+            name: user.name,
+            city: user.city,
+            birthday: user.birthday,
+            age: user.age,
+            phone: user.phone,
+            image: user.image,
+            role: user.role,
+            title: user.jobTitle,
+          }))
+        : filtered;
+
+    setFilteredData(processedFilteredData);
+  }, [data, searchTerm, selectedCity, mode]);
 
   // Functions to set filters
   const filterByName = (search: string) => {
@@ -88,6 +119,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   const toggleHighlightOldest = () => {
     setHighlightOldest((prev) => !prev);
+  };
+  const toggleMode = () => {
+    console.log("i got toggle");
+    setMode((prevMode) => (prevMode === "normal" ? "detail" : "normal"));
   };
 
   const getOldestUsersByCity = () => {
@@ -117,7 +152,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         highlightOldest,
         toggleHighlightOldest,
         oldestUsers,
+        toggleMode,
         isLoading,
+        mode,
       }}
     >
       {children}
