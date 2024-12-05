@@ -89,6 +89,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setIsLoading(true);
     try {
       console.log("making API call");
+      localStorage.setItem("offlineMode", "true");
+      localStorage.setItem("dataSaver", "true");
       const response = await axios.get("https://dummyjson.com/users");
       const processedData = response.data.users.map((user: any) => ({
         id: user.id,

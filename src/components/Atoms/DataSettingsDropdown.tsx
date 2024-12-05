@@ -52,12 +52,9 @@ const DataSettingsDropdown: React.FC = () => {
   useEffect(() => {
     const savedDataSaver = localStorage.getItem("dataSaver") === "true";
     const savedOfflineMode = localStorage.getItem("offlineMode") === "true";
-    if (localStorage.getItem("dataSaver")) {
-      updateSetting("dataSaver", savedDataSaver);
-    }
-    if (localStorage.getItem("offlineMode")) {
-      updateSetting("offlineSave", savedOfflineMode);
-    }
+
+    updateSetting("dataSaver", savedDataSaver);
+    updateSetting("offlineSave", savedOfflineMode);
   }, []);
   const updateSetting = <T extends keyof DataSettings>(
     key: T,
