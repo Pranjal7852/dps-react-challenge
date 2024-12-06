@@ -2,11 +2,9 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Github, Linkedin, Globe } from "lucide-react";
 import devImg from "@/assets/me-Developer.png";
