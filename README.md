@@ -6,6 +6,8 @@ Welcome to my submission for the DPS challenge! This project highlights my imple
 
 ## **Project Overview**
 
+<img width="1233" alt="image" src="https://github.com/user-attachments/assets/1bd229d9-9d60-4ffc-babe-e55e2b20512b">
+
 The goal was to develop a feature-rich web application to manage customer data while adhering to the provided mockup and requirements. I enhanced the core design with additional functionalities to make the application more robust, inclusive, and user-friendly.
 
 ---
@@ -30,6 +32,8 @@ The goal was to develop a feature-rich web application to manage customer data w
 - **Highlighting Oldest Users**: Highlights the oldest users in each city when enabled.
 
 ### 2. **Data Settings Menu**
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/16a308e9-402e-4a2f-8506-ef3c149a0460">
 
 - **View Modes**:
   - **Simplified View**: Displays essential fields in the table.
