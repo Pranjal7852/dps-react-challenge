@@ -27,32 +27,15 @@ import {
   Bold,
   Eye,
 } from "lucide-react";
-
+import { useTheme } from "@/Context/ThemeContext";
 // Define the type for theme settings
 type ThemeSettings = {
-  mode: "light" | "dark" | "system";
+  theme: "light" | "dark" | "DPS";
   highContrast: boolean;
-  primaryColor: string;
-  colorBlindMode: "none" | "deuteranopia" | "protanopia";
 };
 
 const ThemeSettingsDropdown: React.FC = () => {
-  const [themeSettings, setThemeSettings] = useState<ThemeSettings>({
-    mode: "DPS",
-    highContrast: false,
-    primaryColor: "#3B82F6",
-    colorBlindMode: "none",
-  });
-
-  const updateSetting = <T extends keyof ThemeSettings>(
-    key: T,
-    value: ThemeSettings[T]
-  ) => {
-    setThemeSettings((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  const { themeSettings, updateThemeSetting } = useTheme();
 
   return (
     <DropdownMenu>
@@ -70,9 +53,9 @@ const ThemeSettingsDropdown: React.FC = () => {
         {/* Theme Mode */}
         <DropdownMenuLabel>Theme Mode</DropdownMenuLabel>
         <DropdownMenuRadioGroup
-          value={themeSettings.mode}
+          value={themeSettings.theme}
           onValueChange={(value) =>
-            updateSetting("mode", value as ThemeSettings["mode"])
+            updateThemeSetting("theme", value as ThemeSettings["theme"])
           }
         >
           <DropdownMenuRadioItem value="light" className="cursor-pointer">

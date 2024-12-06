@@ -5,7 +5,7 @@ import Table from "./components/Compounds/Table";
 function App() {
   return (
     <>
-      <div className="flex flex-col gap-4 p-6 rounded-lg bg-white w-full">
+      <div className="flex flex-col gap-4 p-6 rounded-lg w-full">
         <MenuBar></MenuBar>
         <div className="overflow-x-auto rounded-lg">
           <Table></Table>

@@ -55,7 +55,7 @@ const Table = () => {
     <div className="flex gap-4 flex-col">
       <table className="w-full table-auto border-collapse border border-gray-300">
         <thead>
-          <tr className="bg-gray-100 text-center">
+          <tr className="text-center">
             {columnHeaders.map((header, index) => (
               <th key={index} className="border border-gray-300 px-4 py-2">
                 {header}
