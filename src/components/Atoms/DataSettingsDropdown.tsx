@@ -15,6 +15,7 @@ import {
   DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 
+import DeveloperDialog from "./DeveloperDialog";
 import { Button } from "@/components/ui/button";
 import {
   Turtle,
@@ -38,6 +39,11 @@ const DataSettingsDropdown: React.FC = () => {
     dataSaver: true,
     offlineSave: true,
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => setIsDialogOpen(true);
+  const closeDialog = () => setIsDialogOpen(false);
+
   const {
     mode,
     toggleMode,
@@ -174,8 +180,6 @@ const DataSettingsDropdown: React.FC = () => {
                 onValueChange={(value) => {
                   const isOn = value === "on";
                   if (offlineMode === isOn) return; // Avoid unnecessary state updates
-
-                  // Update local settings and toggle data saver mode
                   updateSetting("offlineSave", isOn);
                   toggleOfflineMode(isOn);
                 }}
@@ -191,12 +195,16 @@ const DataSettingsDropdown: React.FC = () => {
           </DropdownMenuPortal>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => openDialog()}>
           <Code />
+
           <span>Developer</span>
+          {/* Dialog Component */}
+
           <DropdownMenuShortcut>⌘I</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
+      <DeveloperDialog isOpen={isDialogOpen} onClose={closeDialog} />
     </DropdownMenu>
   );
 };
