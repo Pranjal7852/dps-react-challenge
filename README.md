@@ -34,8 +34,8 @@ The goal was to develop a feature-rich web application to manage customer data w
 - **View Modes**:
   - **Simplified View**: Displays essential fields in the table.
   - **Detailed View**: Displays all fields for a comprehensive view.
-- **Data Saver**: Avoids redundant API requests by storing data in session storage.
-- **Offline Mode**: Persists data using local storage for offline accessibility.
+- **Data Saver**: Avoids redundant API requests by storing data in session storage and persisiting it for the session.
+- **Offline Mode**: Persists data using local storage for offline accessibility (Expire Time - 24Hours).
 
 ### 3. **Theme Settings Menu**
 
@@ -72,4 +72,15 @@ The goal was to develop a feature-rich web application to manage customer data w
     npm run dev
    ```
 
-or you can visit the live [link](https://dps-react-challenge-phi.vercel.app/)
+or you can visit the live [link](https://dps-react-challenge-phi.vercel.app/) here (Deployed using Vercel).
+
+## 🔮 **What's Next?**
+
+Thank you for giving me the opportunity to work on this challenge! It was a great experience to enhance my skills and showcase my abilities in developing a feature-rich web application.
+
+If you have any doubts or need further clarifications regarding the project, please feel free to ping me. I'm happy to assist and provide any additional information you may need.
+
+Looking forward to hearing from you!
+
+Best regards,  
+**Pranjal Goyal**
