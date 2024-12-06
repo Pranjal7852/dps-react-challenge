@@ -47,6 +47,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     document.documentElement.style.fontWeight = themeSettings.boldText
       ? "bold"
       : "normal";
+    if (themeSettings.theme === "DPS") {
+      document.body.style.backgroundColor = "transparent"; // Set body background to transparent
+    } else {
+      document.body.style.backgroundColor = "white"; // Reset background color for other themes
+    }
   }, [themeSettings]);
 
   const updateThemeSetting = <T extends keyof ThemeSettings>(

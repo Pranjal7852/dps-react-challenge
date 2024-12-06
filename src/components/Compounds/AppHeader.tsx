@@ -9,7 +9,7 @@ const AppHeader = () => {
     themeSettings.theme === "dark" ? "text-black" : "text-gray-800";
   return (
     <div
-      className={`${bgClass} ${textColor} p-2 flex items-center justify-between border shadow-md`}
+      className={`${bgClass} ${textColor} p-2 flex items-center justify-between border shadow-md bg-white`}
     >
       <div className="text-left flex items-center gap-2 ml-2">
         <div>

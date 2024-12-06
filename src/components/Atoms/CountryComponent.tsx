@@ -26,7 +26,7 @@ const CountryComponent: React.FC = () => {
 
   return (
     <Select value={selectedCity} onValueChange={handleCitySelect}>
-      <SelectTrigger className="w-1/4">
+      <SelectTrigger className="w-1/4 bg-white">
         <SelectValue placeholder="Select City">{selectedCity}</SelectValue>
       </SelectTrigger>
       <SelectContent>

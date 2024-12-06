@@ -21,6 +21,7 @@ import {
   AArrowDown,
   AArrowUp,
   Bold,
+  Sparkle,
 } from "lucide-react";
 import { useTheme } from "@/Context/ThemeContext";
 // Define the type for theme settings
@@ -72,9 +73,9 @@ const ThemeSettingsDropdown: React.FC = () => {
           {/* <DropdownMenuRadioItem value="dark" className="cursor-pointer">
             <Moon className="mr-2 h-4 w-4" /> Dark
           </DropdownMenuRadioItem> */}
-          {/* <DropdownMenuRadioItem value="DPS" className="cursor-pointer">
+          <DropdownMenuRadioItem value="DPS" className="cursor-pointer">
             <Sparkle className="mr-2 h-4 w-4" /> DPS
-          </DropdownMenuRadioItem> */}
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
 
         <DropdownMenuSeparator />

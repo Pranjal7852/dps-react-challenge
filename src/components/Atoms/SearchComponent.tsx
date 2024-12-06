@@ -24,7 +24,7 @@ const SearchComponent = (props: Props) => {
 
   return (
     <Input
-      className="w-1/4 cursor-text"
+      className="w-1/4 cursor-text bg-white"
       type="search"
       placeholder={props.placeholder}
       value={searchTerm}
