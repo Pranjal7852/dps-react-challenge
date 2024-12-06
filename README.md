@@ -1,44 +1,75 @@
-# DPS Frontend Coding Challenge
+# Digital Product School (DPS) Software Engineer Challenge - ReactCRM+
 
-## Overview
+Welcome to my submission for the DPS challenge! This project highlights my implementation of a customer management system enriched with advanced features and customizations to provide an optimal user experience.
 
-This repository contains a very basic web application based on Typescript and React. Main application file is `App.tsx`. Node and npm are required.
+---
 
-## Environment Setup
+## **Project Overview**
 
-Ensure you have Node.js (v14.x or later) and npm (v6.x or later) installed.  
-To set up and run the application, execute the following commands:
+The goal was to develop a feature-rich web application to manage customer data while adhering to the provided mockup and requirements. I enhanced the core design with additional functionalities to make the application more robust, inclusive, and user-friendly.
 
-```
-npm install
-npm run dev
-```
+---
 
-The application will then be accessible at http://localhost:3000.
+## **Tech Stack**
 
-## Project Context
+- **Frontend Framework**: React (with Context API for state management)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with ShadCN components for rapid UI development
+- **API**: [DummyJSON Users Endpoint](https://dummyjson.com/users)
+- **Storage**: Session Storage and Local Storage for advanced features
+- **Package Manager**: npm
 
-You will be enhancing a new CRM (Customer Relationship Management) software aimed at managing customer data efficiently. Your task is to develop a feature that displays a searchable list of customers.
+---
 
-Refer to the attached mockup image to guide your UI development 👇
+## **Features**
 
-![Mockup](images/mockup.png)
+### 1. **Enhanced Data Management**
 
-## Challenge Tasks
+- **Searchable List**: Filters customers dynamically by name with a 1-second debounce.
+- **City Filter**: Dropdown to filter customers by city.
+- **Highlighting Oldest Users**: Highlights the oldest users in each city when enabled.
 
--   **Fork this project:** Start by forking this repository
--   **UI Implementation:** Implement the user interface according to the provided design mockup.
--   **Data Integration:** Utilize the endpoint https://dummyjson.com/users to fetch user data. If no filter is applied all data is displayed.
--   **Client-side Filtering:** Implement the following filters:
-    -   **Name Filter:** An input field that dynamically filters by `firstName` or `lastName` as you type.
-    -   **City Filter:** A dropdown that lists all cities present in the data. Users can select a city to filter the list accordingly.
-    -   **Highlight Feature:** A checkbox that when checked, highlights the oldest users within each city (use data field `city`)
-    -   **Optional:** Implement a 1-second debounce on the Name Filter input. This means the application should delay the filter action until 1 second has passed without any further input from the user. This optimization helps reduce the number of processing calls, enhancing performance.
--   **Submission:** After completing the challenge, email us the URL of your GitHub repository.
--   **Further information:**
-    -   If there is anything unclear regarding requirements, contact us by replying to our email.
-    -   Use small commits, we want to see your progress towards the solution.
-    -   Code clean and follow the best practices.
+### 2. **Data Settings Menu**
 
-\
-Happy coding!
+- **View Modes**:
+  - **Simplified View**: Displays essential fields in the table.
+  - **Detailed View**: Displays all fields for a comprehensive view.
+- **Data Saver**: Avoids redundant API requests by storing data in session storage.
+- **Offline Mode**: Persists data using local storage for offline accessibility.
+
+### 3. **Theme Settings Menu**
+
+- **Accessibility Features**:
+  - Adjust font size.
+  - Enable bold text for better readability.
+  - Toggle light/dark themes.
+- **DPS Theme**(Couldn't make it to prod): A special theme styled according to DPS's guidelines.
+
+### 4. **Custom Components**
+
+- **Pagination**: For seamless navigation through data.
+- **Menu Bars**: Improved UI navigation experience.
+- **Skeleton Loaders**: Provides a smooth experience during data fetch delays.
+
+---
+
+## **Setup Instructions**
+
+1. **Prerequisites**
+
+   - Install **Node.js (v14.x or later)** and **npm (v6.x or later)**.
+
+2. **Clone the Repository**
+
+   ```bash
+   git clone <repository-url>
+   cd <repository-name>
+   ```
+
+3. **Install Dependencies and Run Project:**
+   ```bash
+    npm install
+    npm run dev
+   ```
+
+or you can visit the live [link](https://dps-react-challenge-phi.vercel.app/)
