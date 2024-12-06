@@ -104,7 +104,7 @@ const ThemeSettingsDropdown: React.FC = () => {
               </DropdownMenuItem>
               <DropdownMenuItem onClick={toggleBoldText}>
                 <Bold className="mr-2 h-4 w-4" />
-                <span>Bold</span>
+                <span>{themeSettings.boldText ? "Unbold" : "Bold"}</span>
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>

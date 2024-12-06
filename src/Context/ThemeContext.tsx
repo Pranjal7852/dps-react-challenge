@@ -31,9 +31,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     boldText: false,
   });
 
+  useEffect(() => {
+    const savedSettings = localStorage.getItem("themeSettings");
+    if (savedSettings) {
+      setThemeSettings(JSON.parse(savedSettings));
+    }
+  }, []);
+
   // Effect to apply theme settings
   useEffect(() => {
-    // Apply theme mode
     document.documentElement.classList.remove("light", "dark", "DPS");
     document.documentElement.classList.add(themeSettings.theme);
 
