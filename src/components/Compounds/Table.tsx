@@ -3,7 +3,7 @@ import { useUserContext } from "@/Context/UserContext";
 import PaginationComponent from "../Atoms/PaginationComponent";
 import { Skeleton } from "@/components/ui/skeleton";
 import userImage from "@/assets/fallback_userImage.png";
-
+import { useTheme } from "@/Context/ThemeContext";
 const SkeletonRow = ({ columns }: { columns: number }) => (
   <tr className="border border-gray-300">
     {[...Array(columns)].map((_, index) => (
@@ -19,7 +19,9 @@ const Table = () => {
     useUserContext();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  const { themeSettings } = useTheme();
+  const highLightColour =
+    themeSettings.theme === "dark" ? "bg-blue-900" : "bg-blue-100";
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -73,7 +75,7 @@ const Table = () => {
                   key={index}
                   className={
                     isOldestUser(user.id) && highlightOldest
-                      ? "bg-blue-100"
+                      ? highLightColour
                       : ""
                   }
                 >
