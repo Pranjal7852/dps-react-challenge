@@ -16,7 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   Sun,
-  Sparkle,
   Settings2,
   FileType,
   AArrowDown,
