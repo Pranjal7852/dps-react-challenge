@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,7 +6,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuCheckboxItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSub,
@@ -19,13 +18,11 @@ import {
   Moon,
   Sun,
   Sparkle,
-  Contrast,
   Settings2,
   FileType,
   AArrowDown,
   AArrowUp,
   Bold,
-  Eye,
 } from "lucide-react";
 import { useTheme } from "@/Context/ThemeContext";
 // Define the type for theme settings
@@ -105,32 +102,6 @@ const ThemeSettingsDropdown: React.FC = () => {
               <DropdownMenuItem onClick={toggleBoldText}>
                 <Bold className="mr-2 h-4 w-4" />
                 <span>{themeSettings.boldText ? "Unbold" : "Bold"}</span>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <Eye className="mr-2 h-4 w-4" />
-            <span>Visual</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuCheckboxItem
-                checked={themeSettings.highContrast}
-                onCheckedChange={(checked) =>
-                  updateSetting("highContrast", !!checked)
-                }
-              >
-                <Contrast className="mr-2 h-4 w-4" /> High Contrast
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuItem>
-                <AArrowDown className="mr-2 h-4 w-4" />
-                <span>Smaller</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bold className="mr-2 h-4 w-4" />
-                <span>Bold</span>
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuPortal>

@@ -18,7 +18,7 @@ const Table = () => {
   const { filteredData, oldestUsers, highlightOldest, isLoading, mode } =
     useUserContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 13;
+  const itemsPerPage = 10;
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -53,7 +53,7 @@ const Table = () => {
 
   return (
     <div className="flex gap-4 flex-col">
-      <table className="w-full table-auto border-collapse border border-gray-300">
+      <table className="w-full table-auto border border-gray-300">
         <thead>
           <tr className="text-center">
             {columnHeaders.map((header, index) => (
