@@ -1,10 +1,10 @@
-import React from "react";
 import CountryComponent from "../Atoms/CountryComponent";
 import SearchComponent from "../Atoms/SearchComponent";
 import { useUserContext } from "@/Context/UserContext";
-type Props = {};
+import ThemeSettingsDropdown from "../Atoms/ThemeSettingsDropdown";
+import DataSettingsDropdown from "../Atoms/DataSettingsDropdown";
 
-const MenuBar = (props: Props) => {
+const MenuBar = () => {
   const { toggleHighlightOldest, highlightOldest } = useUserContext();
 
   return (
@@ -23,6 +23,10 @@ const MenuBar = (props: Props) => {
           className="h-5 w-5 bg-white rounded-sm border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
           onChange={toggleHighlightOldest}
         />
+      </div>
+      <div className="flex gap-2">
+        <DataSettingsDropdown />
+        <ThemeSettingsDropdown />
       </div>
     </div>
   );
