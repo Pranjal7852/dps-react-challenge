@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type ThemeSettings = {
   theme: "light" | "dark" | "DPS";
+  fontSize: number;
+  boldText: boolean;
 };
 
 const ThemeContext = createContext<{
@@ -13,6 +15,8 @@ const ThemeContext = createContext<{
 }>({
   themeSettings: {
     theme: "light",
+    fontSize: 16,
+    boldText: false,
   },
   updateThemeSetting: () => {},
 });
@@ -23,6 +27,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [themeSettings, setThemeSettings] = useState<ThemeSettings>({
     theme: "light",
+    fontSize: 16,
+    boldText: false,
   });
 
   // Effect to apply theme settings
@@ -31,18 +37,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     document.documentElement.classList.remove("light", "dark", "DPS");
     document.documentElement.classList.add(themeSettings.theme);
 
-    // // Apply high contrast
-    // if (themeSettings.highContrast) {
-    //   document.documentElement.classList.add("high-contrast");
-    // } else {
-    //   document.documentElement.classList.remove("high-contrast");
-    // }
-
-    // Apply primary color
-    // document.documentElement.style.setProperty(
-    //   "--primary-color",
-    //   themeSettings.primaryColor
-    // );
+    document.documentElement.style.fontSize = `${themeSettings.fontSize}px`;
+    document.documentElement.style.fontWeight = themeSettings.boldText
+      ? "bold"
+      : "normal";
   }, [themeSettings]);
 
   const updateThemeSetting = <T extends keyof ThemeSettings>(

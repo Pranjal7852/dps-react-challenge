@@ -32,10 +32,23 @@ import { useTheme } from "@/Context/ThemeContext";
 type ThemeSettings = {
   theme: "light" | "dark" | "DPS";
   highContrast: boolean;
+  fontSize: number;
+  boldText: boolean;
 };
 
 const ThemeSettingsDropdown: React.FC = () => {
   const { themeSettings, updateThemeSetting } = useTheme();
+  const increaseFontSize = () => {
+    updateThemeSetting("fontSize", themeSettings.fontSize + 2);
+  };
+
+  const decreaseFontSize = () => {
+    updateThemeSetting("fontSize", Math.max(8, themeSettings.fontSize - 2));
+  };
+
+  const toggleBoldText = () => {
+    updateThemeSetting("boldText", !themeSettings.boldText);
+  };
 
   return (
     <DropdownMenu>
@@ -81,15 +94,15 @@ const ThemeSettingsDropdown: React.FC = () => {
           </DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={increaseFontSize}>
                 <AArrowUp className="mr-2 h-4 w-4" />
                 <span>Larger</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={decreaseFontSize}>
                 <AArrowDown className="mr-2 h-4 w-4" />
                 <span>Smaller</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={toggleBoldText}>
                 <Bold className="mr-2 h-4 w-4" />
                 <span>Bold</span>
               </DropdownMenuItem>
