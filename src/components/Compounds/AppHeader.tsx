@@ -1,4 +1,3 @@
-import React from "react";
 import { useTheme } from "@/Context/ThemeContext";
 import dpsLogo from "@/assets/DPS.svg";
 import { BrainCog } from "lucide-react";
@@ -10,7 +9,7 @@ const AppHeader = () => {
     themeSettings.theme === "dark" ? "text-black" : "text-gray-800";
   return (
     <div
-      className={`${bgClass} ${textColor} p-2 rounded-lg flex items-center justify-between`}
+      className={`${bgClass} ${textColor} p-2 flex items-center justify-between border shadow-md`}
     >
       <div className="text-left flex items-center gap-2 ml-2">
         <div>

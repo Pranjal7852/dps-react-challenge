@@ -12,7 +12,6 @@ interface User {
   name: string;
   city: string;
   birthday: string;
-  [key: string]: unknown;
   age: number;
   phone: string;
   image: string;
@@ -107,7 +106,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         image: user.image,
         eyeColor: user.eyeColor,
         role: user.role,
-        jobTitle: user.company.title,
+        title: user.company.title,
       }));
       setData(processedData);
 
@@ -154,7 +153,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             phone: user.phone,
             image: user.image,
             role: user.role,
-            title: user.jobTitle,
+            title: user.title,
           }))
         : filtered;
 

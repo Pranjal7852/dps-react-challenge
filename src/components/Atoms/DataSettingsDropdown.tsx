@@ -6,7 +6,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuCheckboxItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSub,
@@ -24,7 +23,6 @@ import {
   Settings,
   CloudDownload,
   Leaf,
-  Languages,
 } from "lucide-react";
 import { useUserContext } from "@/Context/UserContext";
 // Define the type for Data settings

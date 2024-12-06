@@ -1,12 +1,10 @@
-import React from "react";
 import CountryComponent from "../Atoms/CountryComponent";
 import SearchComponent from "../Atoms/SearchComponent";
 import { useUserContext } from "@/Context/UserContext";
 import ThemeSettingsDropdown from "../Atoms/ThemeSettingsDropdown";
 import DataSettingsDropdown from "../Atoms/DataSettingsDropdown";
-type Props = {};
 
-const MenuBar = (props: Props) => {
+const MenuBar = () => {
   const { toggleHighlightOldest, highlightOldest } = useUserContext();
 
   return (

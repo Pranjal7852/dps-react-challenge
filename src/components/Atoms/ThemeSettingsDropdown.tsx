@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import {
-  Moon,
   Sun,
   Sparkle,
   Settings2,
@@ -71,9 +70,9 @@ const ThemeSettingsDropdown: React.FC = () => {
           <DropdownMenuRadioItem value="light" className="cursor-pointer">
             <Sun className="mr-2 h-4 w-4" /> Light
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark" className="cursor-pointer">
+          {/* <DropdownMenuRadioItem value="dark" className="cursor-pointer">
             <Moon className="mr-2 h-4 w-4" /> Dark
-          </DropdownMenuRadioItem>
+          </DropdownMenuRadioItem> */}
           <DropdownMenuRadioItem value="DPS" className="cursor-pointer">
             <Sparkle className="mr-2 h-4 w-4" /> DPS
           </DropdownMenuRadioItem>
