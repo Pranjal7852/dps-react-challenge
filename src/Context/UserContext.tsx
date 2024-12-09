@@ -95,7 +95,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem("dataSaver", "true");
       }
 
-      const response = await axios.get("https://dummyjson.com/users");
+      const response = await axios.get("https://dummyjson.com/users?limit=0");
       const processedData = response.data.users.map((user: any) => ({
         id: user.id,
         name: `${user.firstName} ${user.lastName}`,
