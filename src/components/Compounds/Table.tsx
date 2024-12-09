@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserContext } from "@/Context/UserContext";
 import PaginationComponent from "../Atoms/PaginationComponent";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -26,7 +26,9 @@ const Table = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentPageData = filteredData.slice(startIndex, endIndex);
-
+  useEffect(() => {
+    console.log(filteredData.length, "string");
+  }, [filteredData]);
   const handlePageChange = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const handlePrevious = () =>
@@ -120,6 +122,13 @@ const Table = () => {
                   )}
                 </tr>
               ))}
+          {filteredData.length === 0 && (
+            <tr>
+              <td className="px-4 py-2"></td>
+              <td className="px-4 py-2">No Results Found</td>
+              <td className="px-4 py-2"></td>
+            </tr>
+          )}
         </tbody>
       </table>
 
